@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zimbalife Health App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #262a33;
+      background-size: cover;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.85); /* White with 85% opacity */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    h1, h2 {
+      color: #0d47a1;
+    }
+
+    ul {
+      list-style-type: square;
+      margin-left: 20px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .contact, .tech, .footer {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9em;
+      margin-top: 40px;
+      color: #555;
+    }
+
+    .header {
+      display: flex; 
+      justify-content: space-between;
+      align-items: center; 
+      margin-bottom: 30px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-right: 20px; 
+    }
+
+    .profile-container {
+      position: relative; 
+      width: 60px; 
+      height: 60px;
+      border-radius: 50%; 
+      overflow: hidden; 
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+    }
+
+    .profile-tooltip {
+      visibility: hidden;
+      opacity: 0;
+      background-color: #0d47a1;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 12px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%; 
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap; 
+      transition: opacity 0.3s ease; 
+    }
+
+    .profile-tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #0d47a1 transparent transparent transparent;
+    }
+
+    .profile-container:hover .profile-tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .header p {
+      margin: 0;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-left">
+        <img src="zimbalife.png" alt="Zimbalife Logo" class="logo">
+        <div>
+          <h1>Zimbalife</h1>
+          <p>Mobile Health Application</p>
+        </div>
+      </div>
+      <div class="profile-container">
+        <img src="abbey.jpg" alt="Profile Image" class="profile-image">
+        <span class="profile-tooltip">Welcome to Zimbalife by Musumba</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🌟 What the Project Does</h2>
+      <ul>
+        <li>Search and explore doctors based on their specialization</li>
+        <li>Chat with AI or a doctor for health inquiries</li>
+        <li>Book appointments directly from the app</li>
+        <li>Receive appointment confirmations via Email or SMS</li>
+        <li>Manage user profiles and view health activity</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>💡 Why Zimbalife Is Useful</h2>
+      <ul>
+        <li>Provides access to virtual healthcare in underserved areas</li>
+        <li>Offers fast and reliable AI responses for common issues</li>
+        <li>Uses ML to interpret medical reports and symptoms</li>
+        <li>Saves time with remote appointment booking</li>
+        <li>Keeps users informed via health alerts and notifications</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🚀 Getting Started</h2>
+      <ol>
+        <li>Download the APK (coming soon)</li>
+        <li>Install on Android (5.0+)</li>
+        <li>Register or log in</li>
+        <li>Explore: book doctors, chat with AI, manage your health</li>
+      </ol>
+    </div>
+
+    <div class="section contact">
+      <h2>📬 Need Help?</h2>
+      <p>Email: <a href="mailto:ssenkubugeabbey055@gmail.com">ssenkubugeabbey055@gmail.com</a></p>
+      <p>Help section: Coming soon</p>
+    </div>
+
+    <div class="section tech">
+      <h2>🛠 Tech Stack</h2>
+      <ul>
+        <li>Android Studio (Java + XML)</li>
+        <li>Firebase Realtime Database & Authentication</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>👤 Maintainer & Contributors</h2>
+      <p><strong>Name:</strong> Ssenkubuge Abbey</p>
+      <p><strong>Role:</strong> Project Developer</p>
+      <p><strong>Contact:</strong> 0758616763</p>
+      <p><strong>Email:</strong> <a href="mailto:ssenkubugeabbey055@gmail.com">ssenkubugeabbey055@gmail.com</a></p>
+      <p>Want to contribute? Fork the repo and send a pull request.</p>
+    </div>
+
+    <div class="footer">
+      &copy; 2025 Zimbalife &nbsp;All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
