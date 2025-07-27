@@ -309,16 +309,16 @@
       document.getElementById('navLinks').classList.toggle('show');
     }
 
-    // APK alert if not uploaded yet
+    // APK alert if not available yet
     document.getElementById('apkButton').addEventListener('click', function (e) {
-      const isAvailable = false; // change to true when APK is uploaded
+      const isAvailable = false;
       if (!isAvailable) {
         e.preventDefault();
         alert("The APK is not yet available. Please check back soon.");
       }
     });
 
-    // Highlight active section on scroll
+    // Highlight nav item on scroll
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('.nav-links a');
 
