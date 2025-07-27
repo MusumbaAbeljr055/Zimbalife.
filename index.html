@@ -173,19 +173,21 @@
 
     /* APK Button styling */
     #apkButton {
-      padding: 10px 20px; 
-      font-size: 16px; 
-      background-color: #0d47a1; 
-      color: white; 
-      border: none; 
-      border-radius: 5px; 
-      cursor: pointer;
-      margin-top: 15px;
-      transition: background-color 0.3s ease;
-    }
-    #apkButton:hover {
-      background-color: #09407a;
-    }
+  display: inline-block;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #0d47a1;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+#apkButton:hover {
+  background-color: #09407a;
+}
+
   </style>
 </head>
 <body>
@@ -247,7 +249,7 @@
         <li>Register or log in</li>
         <li>Explore: book doctors, chat with AI, manage your health</li>
       </ol>
-      <button id="apkButton">Download APK</button>
+      <a href="Zimbalife.apk" id="apkButton" download>Download APK</a>
     </div>
 
     <div class="section contact" id="contact">
@@ -284,9 +286,9 @@
       document.getElementById('navLinks').classList.toggle('show');
     });
 
-    document.getElementById('apkButton').addEventListener('click', function() {
-      alert('APK coming soon!');
-    });
+    // document.getElementById('apkButton').addEventListener('click', function() {
+    //   alert('APK coming soon!');
+    // });
   </script>
 </body>
 </html>
