@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zimbalife Health App</title>
 
-  <!-- Google Analytics tag (replace G-WME1DZCCX3 with your Measurement ID) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WME1DZCCX3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -22,14 +22,56 @@
       padding: 0;
       color: #333;
       background-color: #262a33;
-      background-size: cover;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #0d47a1;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-brand {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+        background-color: #1565c0;
+        padding: 10px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
     }
 
     .container {
       max-width: 900px;
       margin: auto;
       padding: 40px 20px;
-      background: rgba(255, 255, 255, 0.85); /* White with 85% opacity */
+      background: rgba(255, 255, 255, 0.85);
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
@@ -65,17 +107,19 @@
       justify-content: space-between;
       align-items: center; 
       margin-bottom: 30px;
+      flex-wrap: wrap;
     }
 
     .header-left {
       display: flex;
       align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
     }
 
     .logo {
-      width: 120px;
+      width: 100px;
       height: auto;
-      margin-right: 20px; 
     }
 
     .profile-container {
@@ -127,15 +171,6 @@
       opacity: 1;
     }
 
-    .header h1 {
-      margin: 0;
-    }
-
-    .header p {
-      margin: 0;
-      text-align: right;
-    }
-
     /* APK Button styling */
     #apkButton {
       padding: 10px 20px; 
@@ -154,6 +189,19 @@
   </style>
 </head>
 <body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-brand">☰ Zimbalife</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#what">What It Does</a></li>
+      <li><a href="#why">Why Useful</a></li>
+      <li><a href="#get-started">Get Started</a></li>
+      <li><a href="#contact">Help</a></li>
+      <li><a href="#tech">Tech</a></li>
+    </ul>
+  </nav>
+
   <div class="container">
     <div class="header">
       <div class="header-left">
@@ -169,7 +217,7 @@
       </div>
     </div>
 
-    <div class="section">
+    <div class="section" id="what">
       <h2>🌟 What the Project Does</h2>
       <ul>
         <li>Search and explore doctors based on their specialization</li>
@@ -180,7 +228,7 @@
       </ul>
     </div>
 
-    <div class="section">
+    <div class="section" id="why">
       <h2>💡 Why Zimbalife Is Useful</h2>
       <ul>
         <li>Provides access to virtual healthcare in underserved areas</li>
@@ -191,7 +239,7 @@
       </ul>
     </div>
 
-    <div class="section">
+    <div class="section" id="get-started">
       <h2>🚀 Getting Started</h2>
       <ol>
         <li>Download the APK (coming soon)</li>
@@ -200,20 +248,15 @@
         <li>Explore: book doctors, chat with AI, manage your health</li>
       </ol>
       <button id="apkButton">Download APK</button>
-      <script>
-        document.getElementById('apkButton').addEventListener('click', function() {
-          alert('APK coming soon!');
-        });
-      </script>
     </div>
 
-    <div class="section contact">
+    <div class="section contact" id="contact">
       <h2>📬 Need Help?</h2>
       <p>Email: <a href="mailto:ssenkubugeabbey055@gmail.com">ssenkubugeabbey055@gmail.com</a></p>
       <p>Help section: Coming soon</p>
     </div>
 
-    <div class="section tech">
+    <div class="section tech" id="tech">
       <h2>🛠 Tech Stack</h2>
       <ul>
         <li>Android Studio (Java + XML)</li>
@@ -222,7 +265,7 @@
     </div>
 
     <div class="section">
-      <h2>👤 Maintainer & Contributors</h2>
+      <h2> Maintainer & Contributors</h2>
       <p><strong>Name:</strong> Ssenkubuge Abbey</p>
       <p><strong>Role:</strong> Project Developer</p>
       <p><strong>Contact:</strong> 0758616763</p>
@@ -234,5 +277,16 @@
       &copy; 2025 Zimbalife &nbsp;All rights reserved.
     </div>
   </div>
+
+  <!-- Mobile menu toggle -->
+  <script>
+    document.querySelector('.nav-brand').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('show');
+    });
+
+    document.getElementById('apkButton').addEventListener('click', function() {
+      alert('APK coming soon!');
+    });
+  </script>
 </body>
 </html>
