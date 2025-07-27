@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Zimbalife Health App</title>
+  <link rel="icon" href="zimbalife.png" type="image/png" />
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-WME1DZCCX3"></script>
@@ -15,6 +16,10 @@
   </script>
 
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -23,7 +28,6 @@
       color: #333;
     }
 
-    /* Navbar */
     .navbar {
       background-color: #0d47a1;
       color: white;
@@ -32,11 +36,14 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .nav-brand {
       font-size: 1.2rem;
-      cursor: pointer;
+      font-weight: bold;
     }
 
     .nav-toggle {
@@ -56,6 +63,10 @@
       text-decoration: none;
       color: white;
       font-weight: 500;
+    }
+
+    .nav-links li a.active {
+      border-bottom: 2px solid white;
     }
 
     @media (max-width: 768px) {
@@ -221,7 +232,7 @@
   <div class="container">
     <div class="header">
       <div class="header-left">
-        <img src="zimbalife.png" alt="Zimbalife Logo" class="logo" />
+        <a href="#"><img src="zimbalife.png" alt="Zimbalife Logo" class="logo" /></a>
         <div>
           <h1>Zimbalife</h1>
           <p>Mobile Health Application</p>
@@ -297,6 +308,37 @@
     function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('show');
     }
+
+    // APK alert if not uploaded yet
+    document.getElementById('apkButton').addEventListener('click', function (e) {
+      const isAvailable = false; // change to true when APK is uploaded
+      if (!isAvailable) {
+        e.preventDefault();
+        alert("The APK is not yet available. Please check back soon.");
+      }
+    });
+
+    // Highlight active section on scroll
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 80;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
