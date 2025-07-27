@@ -17,11 +17,10 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      line-height: 1.6;
       margin: 0;
       padding: 0;
-      color: #333;
       background-color: #262a33;
+      color: #333;
     }
 
     /* Navbar */
@@ -40,10 +39,17 @@
       cursor: pointer;
     }
 
+    .nav-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
     .nav-links {
       list-style: none;
       display: flex;
       gap: 20px;
+      margin: 0;
     }
 
     .nav-links li a {
@@ -52,18 +58,26 @@
       font-weight: 500;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+
       .nav-links {
         display: none;
         flex-direction: column;
         width: 100%;
-        margin-top: 10px;
         background-color: #1565c0;
-        padding: 10px;
+        padding: 10px 0;
       }
 
       .nav-links.show {
         display: flex;
+      }
+
+      .nav-links li {
+        padding: 10px;
+        text-align: center;
       }
     }
 
@@ -74,6 +88,75 @@
       background: rgba(255, 255, 255, 0.85);
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+    }
+
+    .profile-container {
+      position: relative;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .profile-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-tooltip {
+      visibility: hidden;
+      opacity: 0;
+      background-color: #0d47a1;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px 12px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      transition: opacity 0.3s ease;
+    }
+
+    .profile-tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #0d47a1 transparent transparent transparent;
+    }
+
+    .profile-container:hover .profile-tooltip {
+      visibility: visible;
+      opacity: 1;
     }
 
     h1, h2 {
@@ -102,99 +185,30 @@
       color: #555;
     }
 
-    .header {
-      display: flex; 
-      justify-content: space-between;
-      align-items: center; 
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      width: 100px;
-      height: auto;
-    }
-
-    .profile-container {
-      position: relative; 
-      width: 60px; 
-      height: 60px;
-      border-radius: 50%; 
-      overflow: hidden; 
-      cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .profile-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; 
-    }
-
-    .profile-tooltip {
-      visibility: hidden;
-      opacity: 0;
-      background-color: #0d47a1;
-      color: #fff;
-      text-align: center;
-      border-radius: 6px;
-      padding: 8px 12px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%; 
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap; 
-      transition: opacity 0.3s ease; 
-    }
-
-    .profile-tooltip::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: #0d47a1 transparent transparent transparent;
-    }
-
-    .profile-container:hover .profile-tooltip {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    /* APK Button styling */
     #apkButton {
-  display: inline-block;
-  text-align: center;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #0d47a1;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 15px;
-  transition: background-color 0.3s ease;
-}
-#apkButton:hover {
-  background-color: #09407a;
-}
+      display: inline-block;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0d47a1;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      transition: background-color 0.3s ease;
+    }
 
+    #apkButton:hover {
+      background-color: #09407a;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- Navbar -->
   <nav class="navbar">
-    <div class="nav-brand">☰ Zimbalife</div>
+    <div class="nav-brand">Zimbalife</div>
+    <div class="nav-toggle" onclick="toggleMenu()">☰</div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#what">What It Does</a></li>
       <li><a href="#why">Why Useful</a></li>
@@ -267,12 +281,11 @@
     </div>
 
     <div class="section">
-      <h2> Maintainer & Contributors</h2>
+      <h2>👤 Maintainer & Contributors</h2>
       <p><strong>Name:</strong> Ssenkubuge Abbey</p>
       <p><strong>Role:</strong> Project Developer</p>
       <p><strong>Contact:</strong> 0758616763</p>
       <p><strong>Email:</strong> <a href="mailto:ssenkubugeabbey055@gmail.com">ssenkubugeabbey055@gmail.com</a></p>
-      <p>Want to contribute? Fork the repo and send a pull request.</p>
     </div>
 
     <div class="footer">
@@ -280,15 +293,10 @@
     </div>
   </div>
 
-  <!-- Mobile menu toggle -->
   <script>
-    document.querySelector('.nav-brand').addEventListener('click', () => {
+    function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('show');
-    });
-
-    // document.getElementById('apkButton').addEventListener('click', function() {
-    //   alert('APK coming soon!');
-    // });
+    }
   </script>
 </body>
 </html>
