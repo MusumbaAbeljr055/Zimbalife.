@@ -28,6 +28,54 @@
       color: #333;
     }
 
+    #topBanner {
+      background-color: #ffc107;
+      color: #000;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+    }
+
+    #topBanner span {
+      float: right;
+      margin-right: 10px;
+      cursor: pointer;
+      color: #000;
+    }
+
+    .toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1000;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 4s;
+    }
+
+    @keyframes fadein {
+      from { bottom: 0; opacity: 0; }
+      to { bottom: 50px; opacity: 1; }
+    }
+
+    @keyframes fadeout {
+      from { bottom: 50px; opacity: 1; }
+      to { bottom: 0; opacity: 0; }
+    }
+
     .navbar {
       background-color: #0d47a1;
       color: white;
@@ -36,9 +84,6 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 999;
     }
 
     .nav-brand {
@@ -216,6 +261,15 @@
 </head>
 <body>
 
+  <!-- 🔔 Top Banner Notification -->
+  <div id="topBanner">
+    📢 <strong>Zimbalife Notice:</strong> The APK is not yet available. Please check back soon.
+    <span onclick="document.getElementById('topBanner').style.display='none'">✖</span>
+  </div>
+
+  <!-- 🔔 Toast Notification -->
+  <div id="toast" class="toast">ℹ️ APK Download Coming Soon!</div>
+
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-brand">Zimbalife</div>
@@ -309,19 +363,25 @@
       document.getElementById('navLinks').classList.toggle('show');
     }
 
-    // APK alert if not available yet
+    // Show toast notification on page load
+    window.onload = function() {
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 5000);
+    };
+
+    // APK not available yet
     document.getElementById('apkButton').addEventListener('click', function (e) {
-      const isAvailable = false;
-      if (!isAvailable) {
+      const available = false;
+      if (!available) {
         e.preventDefault();
         alert("The APK is not yet available. Please check back soon.");
       }
     });
 
-    // Highlight nav item on scroll
+    // Scroll highlighting
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('.nav-links a');
-
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(section => {
@@ -331,7 +391,6 @@
           current = section.getAttribute('id');
         }
       });
-
       navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').includes(current)) {
