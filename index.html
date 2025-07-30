@@ -28,54 +28,6 @@
       color: #333;
     }
 
-    #topBanner {
-      background-color: #ffc107;
-      color: #000;
-      text-align: center;
-      padding: 10px;
-      font-weight: bold;
-      position: sticky;
-      top: 0;
-      z-index: 1001;
-    }
-
-    #topBanner span {
-      float: right;
-      margin-right: 10px;
-      cursor: pointer;
-      color: #000;
-    }
-
-    .toast {
-      visibility: hidden;
-      min-width: 250px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      padding: 16px;
-      position: fixed;
-      z-index: 1000;
-      bottom: 50px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .toast.show {
-      visibility: visible;
-      animation: fadein 0.5s, fadeout 0.5s 4s;
-    }
-
-    @keyframes fadein {
-      from { bottom: 0; opacity: 0; }
-      to { bottom: 50px; opacity: 1; }
-    }
-
-    @keyframes fadeout {
-      from { bottom: 50px; opacity: 1; }
-      to { bottom: 0; opacity: 0; }
-    }
-
     .navbar {
       background-color: #0d47a1;
       color: white;
@@ -84,6 +36,9 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
 
     .nav-brand {
@@ -257,18 +212,91 @@
     #apkButton:hover {
       background-color: #09407a;
     }
+
+    /* === Image slider styles === */
+      .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-slider {
+      position: relative;
+      max-width: 450px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      background: #fff;
+    }
+
+    .image-slider img.slide {
+      width: 100%;
+      max-width: 450px;
+      height: auto;
+      display: none;
+      border-radius: 10px;
+      user-select: none;
+      margin: 0 auto;
+    }
+
+    .image-slider img.active {
+      display: block;
+    }
+
+    .image-slider button.prev,
+    .image-slider button.next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(13, 71, 161, 0.7);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 5px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      user-select: none;
+    }
+
+    .image-slider button.prev { left: 10px; }
+    .image-slider button.next { right: 10px; }
+
+    .dots {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .dot.active, .dot:hover {
+      background-color: #0d47a1;
+    }
+
+    @media (max-width: 480px) {
+      .image-slider {
+        max-width: 300px;
+      }
+      .image-slider img.slide {
+        max-width: 300px;
+      }
+    }
+
   </style>
 </head>
 <body>
-
-  <!-- 🔔 Top Banner Notification -->
-  <div id="topBanner">
-    📢 <strong>Zimbalife Notice:</strong> The APK is not yet available. Please check back soon.
-    <span onclick="document.getElementById('topBanner').style.display='none'">✖</span>
-  </div>
-
-  <!-- 🔔 Toast Notification -->
-  <div id="toast" class="toast">ℹ️ APK Download Coming Soon!</div>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -297,6 +325,29 @@
         <span class="profile-tooltip">Welcome to Zimbalife by Musumba</span>
       </div>
     </div>
+
+    <!-- Image Slider -->
+  <div class="container">
+    <h1>Zimbalife App Screenshots</h1>
+
+    <div class="image-slider" aria-label="Zimbalife App Screenshots">
+      <button class="prev" aria-label="Previous Slide" onclick="changeSlide(-1)">&#10094;</button>
+
+      <img src="pic4.png" class="slide active" alt="Screenshot 1" />
+      <img src="pic1.png" class="slide" alt="Screenshot 2" />
+      <img src="pic2.png" class="slide" alt="Screenshot 3" />
+      <img src="pic3.png" class="slide" alt="Screenshot 4" />
+
+      <button class="next" aria-label="Next Slide" onclick="changeSlide(1)">&#10095;</button>
+
+      <div class="dots">
+        <span class="dot active" onclick="goToSlide(0)"></span>
+        <span class="dot" onclick="goToSlide(1)"></span>
+        <span class="dot" onclick="goToSlide(2)"></span>
+        <span class="dot" onclick="goToSlide(3)"></span>
+      </div>
+    </div>
+  </div>
 
     <div class="section" id="what">
       <h2>🌟 What the Project Does</h2>
@@ -363,25 +414,19 @@
       document.getElementById('navLinks').classList.toggle('show');
     }
 
-    // Show toast notification on page load
-    window.onload = function() {
-      const toast = document.getElementById("toast");
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 5000);
-    };
-
-    // APK not available yet
+    // APK alert if not available yet
     document.getElementById('apkButton').addEventListener('click', function (e) {
-      const available = false;
-      if (!available) {
+      const isAvailable = false;
+      if (!isAvailable) {
         e.preventDefault();
         alert("The APK is not yet available. Please check back soon.");
       }
     });
 
-    // Scroll highlighting
+    // Highlight nav item on scroll
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('.nav-links a');
+
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(section => {
@@ -391,6 +436,7 @@
           current = section.getAttribute('id');
         }
       });
+
       navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href').includes(current)) {
@@ -398,6 +444,48 @@
         }
       });
     });
+
+    // ======= Image slider functionality =======
+     let currentSlide = 0;
+    const slides = document.querySelectorAll('.image-slider img.slide');
+    const dots = document.querySelectorAll('.dot');
+    let slideInterval = null;
+
+    function showSlide(index) {
+      if (index >= slides.length) currentSlide = 0;
+      else if (index < 0) currentSlide = slides.length - 1;
+      else currentSlide = index;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function changeSlide(step) {
+      showSlide(currentSlide + step);
+      resetInterval();
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+      resetInterval();
+    }
+
+    function resetInterval() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 5000);
+    }
+
+    showSlide(currentSlide);
+    slideInterval = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 5000);
   </script>
 </body>
 </html>
