@@ -644,6 +644,29 @@
         font-size: 1.3rem;
       }
 
+      /* FIXED: Ensure nav-toggle is visible on mobile */
+      .nav-toggle {
+        display: block;
+      }
+
+      /* FIXED: Proper mobile menu behavior */
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--secondary-color);
+        padding: 15px 0;
+        margin-top: 15px;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links li {
+        padding: 10px 20px;
+      }
+
       .hero h1 {
         font-size: 2rem;
       }
@@ -865,7 +888,7 @@
         <div class="feature-card">
           <div class="feature-icon"></div>
           <h3>Save Time</h3>
-          <p>No more long queues at clinics get care when you need it</p>
+          <p>No more long queues at clinics - get care when you need it</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon"></div>
